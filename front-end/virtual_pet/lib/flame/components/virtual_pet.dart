@@ -1,17 +1,17 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:virtual_pet/layers/yeti_game.dart';
+import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
 
-class Yeti extends SpriteAnimationComponent with HasGameRef {
-  Yeti() : super(position: Vector2.all(32), size: Vector2.all(100)) {
+class VirtualPet extends SpriteAnimationComponent with HasGameRef {
+  VirtualPet() : super(position: Vector2.all(32), size: Vector2.all(100)) {
     debugMode = true;
   }
 
   double deltaY = 0.5;
   double deltaX = 0;
   double movementTime = 0;
-  YetiState state = YetiState.idle;
+  VirtualPetState state = VirtualPetState.idle;
 
   final animationData = SpriteAnimationData.sequenced(
       amount: 5, stepTime: 0.3, textureSize: Vector2.all(64));

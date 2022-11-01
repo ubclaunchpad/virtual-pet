@@ -1,19 +1,17 @@
-
 import 'package:flame/game.dart';
 
-import '../components/yeti.dart';
+import '../components/virtual_pet.dart';
 
-enum YetiState {
+enum VirtualPetState {
   idle,
   walk,
 }
 
-class YetiGame extends FlameGame {
-
+class VirtualPetGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    add(Yeti());
+    add(VirtualPet());
   }
 }
