@@ -1,0 +1,27 @@
+name: Execute linters and unit tests
+on: pull_request
+
+jobs:
+  ci:
+    runs-on: macOS-latest
+    defaults:
+      run:
+        working-directory: ./front-end/virtual_pet
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2.8.0
+        with: 
+          flutter-version: '3.3.4'
+          channel: 'stable'
+
+      - name: Install dependencies 
+        run: flutter pub get
+
+      - name: Run linters and analyze code
+        run: flutter analyze
+
+      - name: Run unit tests
+        run: flutter test
