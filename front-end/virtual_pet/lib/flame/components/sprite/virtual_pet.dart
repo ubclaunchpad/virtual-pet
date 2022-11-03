@@ -1,22 +1,24 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
+import 'package:virtual_pet/flame/animations/virtual_pet_animation_config.dart';
+import 'package:virtual_pet/flame/components/sprite/virtual_pet_state.dart';
 
 class VirtualPet extends SpriteAnimationComponent with HasGameRef {
   VirtualPet() : super(position: Vector2.all(32), size: Vector2.all(100)) {
     debugMode = true;
   }
 
+  static final VirtualPetAnimationDataConfig _animationDataConfig = VirtualPetAnimationDataConfig();
+
+  late final SpriteAnimation idleAnimation;
+  late final SpriteAnimation walkAnimation;
+  late final SpriteAnimation jumpAnimation;
+
   double deltaY = 0.5;
   double deltaX = 0;
   double movementTime = 0;
   VirtualPetState state = VirtualPetState.idle;
-
-  final animationData = SpriteAnimationData.sequenced(
-      amount: 5, stepTime: 0.3, textureSize: Vector2.all(64));
-  late final SpriteAnimation idleAnimation;
-  late final SpriteAnimation walkAnimation;
 
   @override
   Future<void> onLoad() async {
@@ -39,14 +41,14 @@ class VirtualPet extends SpriteAnimationComponent with HasGameRef {
   }
 
   void randomizeMovement(double delta) {
-    Random _rand = Random();
+    Random rand = Random();
     if (movementTime > 0) {
       movementTime -= delta;
     } else {
-      movementTime = 10 + (_rand.nextInt(40) + 1) * delta;
-      deltaX = (-1 + _rand.nextInt(3) + 1);
+      movementTime = 10 + (rand.nextInt(40) + 1) * delta;
+      deltaX = (-1 + rand.nextInt(3) + 1);
       flipHorizontally();
-      deltaY = (-1 + _rand.nextInt(3) + 1);
+      deltaY = (-1 + rand.nextInt(3) + 1);
     }
   }
 
@@ -66,8 +68,13 @@ class VirtualPet extends SpriteAnimationComponent with HasGameRef {
 
   Future<void> loadAnimations() async {
     idleAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images.load('yeti_idle.png'), animationData);
+        await gameRef.images.load(_animationDataConfig.idleAnimationData.animationPath),
+          _animationDataConfig.idleAnimationData.animationData);
     walkAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images.load('yeti_walk.png'), animationData);
+        await gameRef.images.load(_animationDataConfig.walkAnimationData.animationPath),
+          _animationDataConfig.walkAnimationData.animationData);
+    jumpAnimation = SpriteAnimation.fromFrameData(
+        await gameRef.images.load(_animationDataConfig.jumpAnimationData.animationPath),
+          _animationDataConfig.jumpAnimationData.animationData);
   }
 }

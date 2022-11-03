@@ -1,11 +1,6 @@
 import 'package:flame/game.dart';
 
-import '../components/virtual_pet.dart';
-
-enum VirtualPetState {
-  idle,
-  walk,
-}
+import '../components/sprite/virtual_pet.dart';
 
 class VirtualPetGame extends FlameGame {
   @override
