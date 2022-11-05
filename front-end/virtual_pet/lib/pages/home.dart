@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_pet/pages/page_two.dart';
+import 'package:virtual_pet/pages/pomodoro_page.dart';
 import '../flame/layers/virtual_pet_game_layer.dart';
 
 /// home page
@@ -15,27 +16,42 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).canvasColor,
-      body: const Center(
-        child: VirutalPetGameLayer(),
-      ),
-
-      /// instead of using bottom sheet, we could also try bottomNavigationBar
-      bottomSheet: Container(
-        color: Theme.of(context).canvasColor,
-        width: MediaQuery.of(context).size.width,
-        height: 80.0,
-        child: IconButton(
-          onPressed: () {
-            /// when pressed, the push function will be called for UI to display page two
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PageTwo()),
-            );
-          },
-          icon: const Icon(Icons.event_available, size: 60.0),
+        backgroundColor: Theme.of(context).canvasColor,
+        body: const Center(
+          child: VirutalPetGameLayer(),
         ),
-      )
-    );
+
+        /// instead of using bottom sheet, we could also try bottomNavigationBar
+        bottomSheet: Container(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            color: Theme.of(context).canvasColor,
+            width: MediaQuery.of(context).size.width,
+            height: 60.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display page two
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PageTwo()),
+                    );
+                  },
+                  icon: const Icon(Icons.event_available, size: 50.0),
+                ),
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display pomodoro page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PomodoroPage()),
+                    );
+                  },
+                  icon: const Icon(Icons.timer, size: 50.0),
+                ),
+              ],
+            )));
   }
 }
