@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_pet/pages/page_two.dart';
 import 'package:virtual_pet/pages/pomodoro_page.dart';
+import 'package:virtual_pet/widgets/task_complete.dart';
 import '../flame/layers/virtual_pet_game_layer.dart';
 
 /// home page
@@ -51,6 +52,17 @@ class HomeState extends State<Home> {
                   },
                   icon: const Icon(Icons.timer, size: 50.0),
                 ),
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display pomodoro page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TaskComplete(),
+                        ));
+                  },
+                  icon: const Icon(Icons.text_fields, size: 50.0),
+                )
               ],
             )));
   }
