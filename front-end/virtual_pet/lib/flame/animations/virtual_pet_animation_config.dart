@@ -1,25 +1,36 @@
 import 'package:flame/components.dart';
 import 'package:virtual_pet/flame/animations/virtual_pet_animation_data.dart';
-import 'package:virtual_pet/flame/components/sprite/virtual_pet_state.dart';
+
+const double stepTime = 0.30;
+const double singleSpriteFrameSize = 32;
 
 /// Base image folder is at assets/images. When specifying the animation .png path, provide the
-/// file path relative to assets/images folder. 
+/// file path relative to assets/images folder.
+
 class VirtualPetAnimationDataConfig {
-  final VirtualPetAnimationData idleAnimationData = VirtualPetAnimationData(
-      "owl/owlet_idle.png",
-      VirtualPetState.idle,
+  final VirtualPetAnimationData idleAnimationData = VirtualPetAnimationData("owl/owlet_idle.png",
       SpriteAnimationData.sequenced(
-          amount: 5, stepTime: 0.30, textureSize: Vector2.all(32)));
+        amount: 4, 
+        stepTime: stepTime, 
+        textureSize: Vector2.all(singleSpriteFrameSize)));
 
-  final VirtualPetAnimationData walkAnimationData = VirtualPetAnimationData(
-      "owl/owlet_walk.png",
-      VirtualPetState.walk,
+  final VirtualPetAnimationData walkAnimationData = VirtualPetAnimationData("owl/owlet_walk.png",
       SpriteAnimationData.sequenced(
-          amount: 5, stepTime: 0.30, textureSize: Vector2.all(32)));
+        amount: 6, 
+        stepTime: stepTime, 
+        textureSize: Vector2.all(singleSpriteFrameSize)));
 
-  final VirtualPetAnimationData jumpAnimationData = VirtualPetAnimationData(
-      "owl/owlet_jump.png",
-      VirtualPetState.jump,
+  final VirtualPetAnimationData jumpAnimationData = VirtualPetAnimationData("owl/owlet_jump.png",
       SpriteAnimationData.sequenced(
-          amount: 5, stepTime: 0.30, textureSize: Vector2.all(32)));
+        amount: 8, 
+        stepTime: stepTime, 
+        textureSize: Vector2.all(singleSpriteFrameSize)));
+
+  final VirtualPetAnimationData dieAnimationData = VirtualPetAnimationData(
+      "owl/owlet_death.png",
+      SpriteAnimationData.sequenced(
+          amount: 9, 
+          stepTime: stepTime, 
+          textureSize: Vector2.all(singleSpriteFrameSize), 
+          loop: false));
 }

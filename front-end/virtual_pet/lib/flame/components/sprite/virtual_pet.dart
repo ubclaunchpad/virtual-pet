@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:virtual_pet/flame/animations/virtual_pet_animation_config.dart';
 import 'package:virtual_pet/flame/components/sprite/virtual_pet_state.dart';
+import 'package:virtual_pet/flame/enums/virtual_pet_animation_state.dart';
 
 class VirtualPet extends SpriteAnimationComponent with HasGameRef {
-  VirtualPet() : super(position: Vector2.all(32), size: Vector2.all(100)) {
+  VirtualPet(this.virtualPetState) : super(size: Vector2.all(100)) {
     debugMode = true;
   }
 
@@ -14,30 +15,38 @@ class VirtualPet extends SpriteAnimationComponent with HasGameRef {
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation walkAnimation;
   late final SpriteAnimation jumpAnimation;
+  late final SpriteAnimation deathAnimation;
 
   double deltaY = 0.5;
   double deltaX = 0;
   double movementTime = 0;
-  VirtualPetState state = VirtualPetState.idle;
+  VirtualPetState virtualPetState;
+  late VirtualPetAnimationState state;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    position = Vector2(gameRef.size.y / 2, gameRef.size.x / 2);
     loadAnimations().then((_) => animation = walkAnimation);
   }
 
   @override
   Future<void> update(double dt) async {
     super.update(dt);
-    moveSelf(dt);
-    if (deltaX == 0 || deltaY == 0) {
-      deltaX = 0;
-      deltaY = 0;
-      animation = idleAnimation;
+
+    if (virtualPetState.getHealth() > 0) {
+      moveSelf(dt);
+      if (deltaX == 0 || deltaY == 0) {
+        deltaX = 0;
+        deltaY = 0;
+        animation = idleAnimation;
+      } else {
+        animation = walkAnimation;
+      }
+      randomizeMovement(dt);
     } else {
-      animation = walkAnimation;
+      animation = deathAnimation;
     }
-    randomizeMovement(dt);
   }
 
   void randomizeMovement(double delta) {
@@ -56,12 +65,12 @@ class VirtualPet extends SpriteAnimationComponent with HasGameRef {
     y = y + deltaY;
     x = x + deltaX;
 
-    if (x <= 0 || x >= gameRef.canvasSize.x - 64) {
+    if (x <= 0 || x >= gameRef.canvasSize.x - 100) {
       deltaX *= -1;
       flipHorizontally();
     }
 
-    if (y <= 0 || y >= gameRef.canvasSize.y - 64) {
+    if (y <= 0 || y >= gameRef.canvasSize.y - 120) {
       deltaY *= -1;
     }
   }
@@ -69,12 +78,15 @@ class VirtualPet extends SpriteAnimationComponent with HasGameRef {
   Future<void> loadAnimations() async {
     idleAnimation = SpriteAnimation.fromFrameData(
         await gameRef.images.load(_animationDataConfig.idleAnimationData.animationPath),
-          _animationDataConfig.idleAnimationData.animationData);
+        _animationDataConfig.idleAnimationData.animationData);
     walkAnimation = SpriteAnimation.fromFrameData(
         await gameRef.images.load(_animationDataConfig.walkAnimationData.animationPath),
-          _animationDataConfig.walkAnimationData.animationData);
+        _animationDataConfig.walkAnimationData.animationData);
     jumpAnimation = SpriteAnimation.fromFrameData(
         await gameRef.images.load(_animationDataConfig.jumpAnimationData.animationPath),
-          _animationDataConfig.jumpAnimationData.animationData);
+        _animationDataConfig.jumpAnimationData.animationData);
+    deathAnimation = SpriteAnimation.fromFrameData(
+        await gameRef.images.load(_animationDataConfig.dieAnimationData.animationPath),
+        _animationDataConfig.dieAnimationData.animationData);
   }
 }
