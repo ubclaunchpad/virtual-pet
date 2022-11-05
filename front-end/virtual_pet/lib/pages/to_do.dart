@@ -20,6 +20,7 @@ class PageTwoState extends State<PageTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         /// displays the "To Do:" message at the top
         appBar: AppBar(
           backgroundColor: Theme.of(context).canvasColor,
@@ -28,6 +29,10 @@ class PageTwoState extends State<PageTwo> {
             "To Do:",
             style: TextStyle(color: Colors.black),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add), // doesn't like new for some reason?
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           /// below are the checkboxes widgets
@@ -66,8 +71,6 @@ class PageTwoState extends State<PageTwo> {
             },
             title: const Text("Some other boring task"),
           ),
-        ]
-      )
-    );
+        ]));
   }
 }
