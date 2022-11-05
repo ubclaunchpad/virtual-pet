@@ -25,14 +25,14 @@ class PomodoroState extends State<PomodoroPage> {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: Container(
-          child: const Text(
-            "Pomodoro timer coming soon...",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 40.0,
-            ),
+        body:
+        const Text(
+          "Pomodoro timer coming soon...",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 40.0,
           ),
-        ));
+        ),
+    );
   }
 }
