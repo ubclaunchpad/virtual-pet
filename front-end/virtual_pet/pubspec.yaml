@@ -18,6 +18,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  canvas_test: ^0.2.0
+  flame_test: ^1.8.0
   flutter_lints: ^2.0.0
 
   flutter_test:
