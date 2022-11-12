@@ -35,7 +35,7 @@ class HomeState extends State<Home> {
                     /// when pressed, the push function will be called for UI to display page two
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const PageTwo()),
+                      MaterialPageRoute(builder: (context) => TodoList()),
                     );
                   },
                   icon: const Icon(Icons.event_available, size: 50.0),
