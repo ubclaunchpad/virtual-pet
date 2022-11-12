@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_pet/widgets/app_bar.dart';
 
 /// to do list
 class ToDoListPage extends StatefulWidget {
@@ -20,16 +21,8 @@ class ToDoState extends State<ToDoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         /// displays the "To Do:" message at the top
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
-          elevation: 1.0,
-          title: const Text(
-            "To Do:",
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
+        appBar: const CustomAppBar(title: "To-Do"),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           /// below are the checkboxes widgets
           CheckboxListTile(
