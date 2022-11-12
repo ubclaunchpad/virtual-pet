@@ -54,7 +54,7 @@ class HomeState extends State<Home> {
                 ),
                 IconButton(
                   onPressed: () {
-                    /// when pressed, the push function will be called for UI to display pomodoro page
+                    /// when pressed on button, the app will pop up a task-complete window
                     Navigator.push(
                         context,
                         MaterialPageRoute(

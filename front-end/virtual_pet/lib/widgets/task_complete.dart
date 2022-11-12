@@ -31,6 +31,7 @@ class TaskComplete extends StatelessWidget {
               style: TextStyle(fontStyle: FontStyle.italic)),
           Text("and tell us how your rest went!",
               style: TextStyle(fontStyle: FontStyle.italic))
+          //TODO: ADD PICTURE HERE IF NEEDED IN THE FUTURE.
         ],
       ),
       ////%
