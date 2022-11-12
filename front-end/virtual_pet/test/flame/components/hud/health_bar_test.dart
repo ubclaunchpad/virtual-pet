@@ -1,6 +1,6 @@
 import 'package:flame/extensions.dart';
 import 'package:flame_test/flame_test.dart';
-import 'package:virtual_pet/flame/components/health_bar/health_bar.dart';
+import 'package:virtual_pet/flame/components/hud/health_bar.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
@@ -17,9 +17,14 @@ void main() {
   group('health bar tests', () {
     TestWidgetsFlutterBinding.ensureInitialized();
 
+    late HealthBar healthBar;
+
+    setUp(() {
+      healthBar = HealthBar();
+    });
+
     virtualPetGameTest
       ..test('test initial health bar', (game) async {
-        HealthBar healthBar = HealthBar();
         int fullHealth = 100;
         game.add(healthBar);
 
@@ -27,9 +32,7 @@ void main() {
 
         expect(healthBar.healthTextComponent.text, healthBar.healthDisplayMessage(fullHealth));
       })
-      
       ..test('test not full health bar', (game) async {
-        HealthBar healthBar = HealthBar();
         int reducedHealth = 50;
         game.add(healthBar);
 

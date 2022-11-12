@@ -48,6 +48,7 @@ class VirtualPetAnimation extends SpriteAnimationComponent with HasGameRef<Virtu
   @override
   Future<void> update(double dt) async {
     super.update(dt);
+    position = Vector2((gameRef.size.x / 2) - (size.x / 2), (gameRef.size.y / 2) - (size.y / 2));
 
     if (gameRef.virtualPetData.health.value <= 0) {
       changeState(VirtualPetAnimationState.death);
