@@ -1,11 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
+import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
 
 class HealthBar extends Component with HasGameRef<VirtualPetGame> {
   late final TextComponent healthTextComponent;
-  late final ShapeComponent healthContainer;
-  late final ShapeComponent healthBar;
 
   HealthBar() : super();
 
@@ -13,8 +11,10 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
   Future<void> onLoad() async {
     gameRef.virtualPetData.health.addListener(onHealthChange);
 
-    healthTextComponent = TextComponent(text: "", anchor: Anchor.topLeft);
-    healthTextComponent.text = "Health: ${gameRef.virtualPetData.health.value}/100";
+    healthTextComponent = TextComponent(
+      text: healthDisplayMessage(gameRef.virtualPetData.health.value), 
+      anchor: Anchor.topLeft
+    );
     add(healthTextComponent);
 
     return super.onLoad();
@@ -23,7 +23,7 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
   @override
   void render(Canvas canvas) {
     Rect healthContainer =
-        Rect.fromCenter(center: Offset.zero, width: calculateHealthBarSize(), height: 50);
+      Rect.fromCenter(center: Offset.zero, width: calculateHealthBarSize(), height: 50);
     canvas.drawRect(healthContainer, Paint()..color = Colors.green);
   }
 
@@ -34,10 +34,14 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
   }
 
   double calculateHealthBarSize() {
-    return 2 * gameRef.size.x * (gameRef.virtualPetData.health.value / 100);
+    return 2.0 * gameRef.size.x * (gameRef.virtualPetData.health.value / 100);
+  }
+
+  String healthDisplayMessage(int health) {
+    return "Health: $health/100";
   }
 
   void onHealthChange() {
-    healthTextComponent.text = "Health: ${gameRef.virtualPetData.health.value}/100";
+    healthTextComponent.text = healthDisplayMessage(gameRef.virtualPetData.health.value);
   }
 }
