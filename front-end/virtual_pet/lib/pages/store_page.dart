@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:virtual_pet/widgets/app_bar.dart';
 
 /// pomodoro page (pomodoro timer)
 class StorePage extends StatefulWidget {
@@ -15,17 +16,10 @@ class StorePageState extends State<StorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       /// displays the "Store" message at the top
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).canvasColor,
-        elevation: 1.0,
-        title: const Text(
-          "Store",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: const Text(
+      appBar: CustomAppBar(title: "Store"),
+      body: Text(
         "Store page goes here...",
         style: TextStyle(
           color: Colors.black,

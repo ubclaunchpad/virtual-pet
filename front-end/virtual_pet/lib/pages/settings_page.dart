@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_pet/widgets/app_bar.dart';
 
 /// pomodoro page (pomodoro timer)
 class SettingsPage extends StatefulWidget {
@@ -14,17 +15,10 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       /// displays the "Settings" message at the top
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).canvasColor,
-        elevation: 1.0,
-        title: const Text(
-          "Settings",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: const Text(
+      appBar: CustomAppBar(title: "Settings"),
+      body: Text(
         "Settings goes here...",
         style: TextStyle(
           color: Colors.black,
