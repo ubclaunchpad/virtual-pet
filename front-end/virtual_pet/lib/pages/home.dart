@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_pet/pages/page_two.dart';
+import 'package:virtual_pet/pages/store_page.dart';
+import 'package:virtual_pet/pages/settings_page.dart';
+import 'package:virtual_pet/pages/todolist_page.dart';
 import 'package:virtual_pet/pages/pomodoro_page.dart';
 import '../flame/layers/virtual_pet_game_layer.dart';
 
@@ -35,7 +37,7 @@ class HomeState extends State<Home> {
                     /// when pressed, the push function will be called for UI to display page two
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const PageTwo()),
+                      MaterialPageRoute(builder: (context) => const ToDoListPage()),
                     );
                   },
                   icon: const Icon(Icons.event_available, size: 50.0),
@@ -51,7 +53,31 @@ class HomeState extends State<Home> {
                   },
                   icon: const Icon(Icons.timer, size: 50.0),
                 ),
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display settings menu
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsPage()),
+                    );
+                  },
+                  icon: const Icon(Icons.settings, size: 50.0),
+                ),
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display store menu
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StorePage()),
+                    );
+                  },
+                  icon: const Icon(Icons.store, size: 50.0),
+                ),
               ],
-            )));
+            )
+        )
+    );
   }
 }
