@@ -41,7 +41,7 @@ class VirtualPetAnimation extends SpriteAnimationComponent with HasGameRef<Virtu
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    position = Vector2((gameRef.size.y / 2) - (size.y / 2), (gameRef.size.x / 2) - (size.x / 2));
+    position = Vector2((gameRef.size.x / 2) - (size.x / 2), (gameRef.size.y / 2) - (size.y / 2));
     loadAnimations().then((_) => animation = idleAnimation);
   }
 
