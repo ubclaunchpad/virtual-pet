@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
+import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
 
 class HealthTimer extends Component with HasGameRef<VirtualPetGame> {
   late Timer healthIntervalTimer;

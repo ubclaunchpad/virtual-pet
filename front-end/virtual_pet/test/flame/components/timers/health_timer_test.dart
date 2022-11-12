@@ -1,9 +1,9 @@
 import 'package:flame/extensions.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:virtual_pet/flame/components/timers/health_timer.dart';
-import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
 
 const double xSize = 100;
 const double ySize = 100;

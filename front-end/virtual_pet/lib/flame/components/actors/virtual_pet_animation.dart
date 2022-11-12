@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:virtual_pet/flame/components/animations/virtual_pet_animation_config.dart';
 import 'package:virtual_pet/flame/components/animations/virtual_pet_animation_state.dart';
-import 'package:virtual_pet/flame/game/vitural_pet_game.dart';
+import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
 
 const double virtualPetSize = 200;
 
