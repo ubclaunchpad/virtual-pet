@@ -30,7 +30,7 @@ class PomodoroState extends State<PomodoroPage> {
           "Pomodoro timer coming soon...",
           style: TextStyle(
             color: Colors.black,
-            fontSize: 40.0,
+            fontSize: 30.0,
           ),
         ),
     );
