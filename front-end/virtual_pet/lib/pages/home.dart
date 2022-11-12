@@ -21,7 +21,7 @@ class HomeState extends State<Home> {
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
         body: const Center(
-          child: VirutalPetGameLayer(),
+          child: VirtualPetGameLayer(),
         ),
 
         /// instead of using bottom sheet, we could also try bottomNavigationBar
