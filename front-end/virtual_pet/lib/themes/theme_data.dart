@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 /// used for colour palette and styling
 final ThemeData themeData = ThemeData(
-  canvasColor: Colors.green[100],
+  canvasColor: const Color.fromARGB(255, 200, 228, 185),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+  bottomSheetTheme: const BottomSheetThemeData(
+    backgroundColor: Color.fromARGB(255, 200, 228, 185),
+  ),
+  iconTheme: const IconThemeData(
+    color: Color.fromARGB(255, 0, 0, 0),
+  ),
 );
