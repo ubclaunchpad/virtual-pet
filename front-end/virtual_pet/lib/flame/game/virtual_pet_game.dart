@@ -6,12 +6,13 @@ import 'package:virtual_pet/flame/components/hud/health_bar.dart';
 import 'package:virtual_pet/flame/components/hud/level_bar.dart';
 import 'package:virtual_pet/flame/components/timers/health_timer.dart';
 import 'package:virtual_pet/flame/components/timers/level_timer.dart';
+import 'package:virtual_pet/themes/theme_data.dart';
 
 class VirtualPetGame extends FlameGame {
   final VirtualPetData virtualPetData = VirtualPetData();
 
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 200, 228, 185);
+  Color backgroundColor() => themeData.backgroundColor;
 
   @override
   Future<void> onLoad() async {
