@@ -19,7 +19,6 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).canvasColor,
       body: const Center(
         child: VirtualPetGameLayer(),
       ),
@@ -27,7 +26,6 @@ class HomeState extends State<Home> {
       /// instead of using bottom sheet, we could also try bottomNavigationBar
       bottomSheet: Container(
         padding: const EdgeInsets.only(bottom: 10.0),
-        color: Theme.of(context).bottomSheetTheme.backgroundColor,
         width: MediaQuery.of(context).size.width,
         height: 70.0,
         child: Row(

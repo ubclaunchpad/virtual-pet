@@ -12,6 +12,7 @@ class VirtualPetGame extends FlameGame {
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 200, 228, 185);
+
   @override
   Future<void> onLoad() async {
     add(HealthTimer());
