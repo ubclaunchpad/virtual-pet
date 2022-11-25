@@ -1,13 +1,21 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_pet/flame/game/virtual_pet_game.dart';
 
-class VirtualPetGameLayer extends StatelessWidget {
-  const VirtualPetGameLayer({super.key});
+class InheritedVirtualPetGameWrapper extends InheritedWidget {
+  final VirtualPetGame virtualPetGame;
 
-  @override
-  Widget build(BuildContext context) {
-    return GameWidget(
-      game: VirtualPetGame());
+  const InheritedVirtualPetGameWrapper({
+    required this.virtualPetGame, 
+    required Widget child, 
+    super.key}) : super(child: child);
+
+  @override 
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
+
+  static InheritedVirtualPetGameWrapper of(BuildContext context) {
+    final InheritedVirtualPetGameWrapper? result = context
+      .dependOnInheritedWidgetOfExactType<InheritedVirtualPetGameWrapper>();
+    assert(result != null, 'No Game Wrapper is present in context');
+    return result!;
   }
 }

@@ -12,6 +12,6 @@ import 'package:virtual_pet/main.dart';
 void main() {
   testWidgets('Test main application can be created', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const VirtualPetApp());
   });
 }
