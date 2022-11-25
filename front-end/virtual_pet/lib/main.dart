@@ -1,6 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_pet/flame/layers/virtual_pet_game_layer.dart';
+import 'package:virtual_pet/inherited_widgets/inherited_virtual_pet_game_wrapper.dart';
 import 'package:virtual_pet/pages/home.dart';
 import 'package:virtual_pet/themes/theme_data.dart';
 
