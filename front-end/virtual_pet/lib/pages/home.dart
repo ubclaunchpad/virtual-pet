@@ -1,6 +1,8 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_pet/pages/store_page.dart';
 import 'package:virtual_pet/pages/settings_page.dart';
+import 'package:virtual_pet/pages/testing_page.dart';
 import 'package:virtual_pet/pages/todolist_page.dart';
 import 'package:virtual_pet/pages/pomodoro_page.dart';
 import 'package:virtual_pet/widgets/task_complete.dart';
@@ -19,9 +21,9 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: const SafeArea(
+        body: SafeArea(
           child: Center(
-            child: VirtualPetGameLayer(),
+            child: GameWidget(game: InheritedVirtualPetGameWrapper.of(context).virtualPetGame),
           ),
         ),
 
@@ -87,6 +89,17 @@ class HomeState extends State<Home> {
                     );
                   },
                   icon: const Icon(Icons.store, size: 50.0),
+                ),
+                IconButton(
+                  onPressed: () {
+                    /// when pressed, the push function will be called for UI to display store menu
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TestingPage()),
+                    );
+                  },
+                  icon: const Icon(Icons.science, size: 50.0),
                 ),
               ],
             )));
