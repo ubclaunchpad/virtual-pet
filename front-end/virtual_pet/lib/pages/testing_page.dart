@@ -1,6 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:virtual_pet/flame/layers/virtual_pet_game_layer.dart';
+import 'package:virtual_pet/inherited_widgets/inherited_virtual_pet_game_wrapper.dart';
 import 'package:virtual_pet/widgets/app_bar.dart';
 
 /// pomodoro page (pomodoro timer)

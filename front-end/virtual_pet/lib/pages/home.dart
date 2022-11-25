@@ -6,7 +6,7 @@ import 'package:virtual_pet/pages/testing_page.dart';
 import 'package:virtual_pet/pages/todolist_page.dart';
 import 'package:virtual_pet/pages/pomodoro_page.dart';
 import 'package:virtual_pet/widgets/task_complete.dart';
-import '../flame/layers/virtual_pet_game_layer.dart';
+import '../inherited_widgets/inherited_virtual_pet_game_wrapper.dart';
 
 /// home page
 class Home extends StatefulWidget {
