@@ -13,7 +13,7 @@ class InheritedVirtualPetGameWrapper extends InheritedWidget {
   @override 
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return this != oldWidget;
-  };
+  }
 
   static InheritedVirtualPetGameWrapper of(BuildContext context) {
     final InheritedVirtualPetGameWrapper? result = context
