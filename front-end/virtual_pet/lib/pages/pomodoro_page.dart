@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'minutes.dart';
 import 'dart:async';
+import 'package:virtual_pet/widgets/app_bar.dart';
 
 /// pomodoro page (pomodoro timer)
 class PomodoroPage extends StatefulWidget {
@@ -60,6 +61,7 @@ class PomodoroState extends State<PomodoroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.grey[900],
+      appBar: const CustomAppBar(title: "Timer"),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
