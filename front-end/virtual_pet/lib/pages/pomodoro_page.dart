@@ -14,10 +14,11 @@ class PomodoroPage extends StatefulWidget {
 
 /// the state of pomodoro page (timer)
 class PomodoroState extends State<PomodoroPage> {
-  int timeLeft = 0;
   static const String routeName = "/PomodoroPage";
-  bool inProgress = false;
+  int timeLeft = 0;
   int lastValue = 0;
+  bool inProgress = false;
+  bool firstTime = true;
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class PomodoroState extends State<PomodoroPage> {
   void _startCountDown() {
     setState(() {
       inProgress = true;
+      firstTime = false;
       lastValue = timeLeft;
     });
     Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -95,14 +97,16 @@ class PomodoroState extends State<PomodoroPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Text(inProgress.toString()),
+              Text("inProgress is " + inProgress.toString()),
               // Text("LAST VALUE IS " + lastValue.toString()),
               Text(
                 timeLeft == 0 ? "DONE" : timeLeft.toString(),
                 style: const TextStyle(fontSize: 50),
               ),
               MaterialButton(
-                onPressed: _startCountDown,
+                onPressed: timeLeft != 0 && inProgress == false
+                    ? _startCountDown
+                    : null,
                 color: Colors.blue,
                 child: const Text("START TIMER"),
               ),
@@ -112,7 +116,9 @@ class PomodoroState extends State<PomodoroPage> {
                 child: const Text("STOP TIMER"),
               ),
               MaterialButton(
-                onPressed: inProgress == true ? null : _restartTimer,
+                onPressed: firstTime == true || inProgress == true
+                    ? null
+                    : _restartTimer,
                 color: Colors.blue,
                 // child: Text("RESTART TIMER (" + lastValue.toString() + ")"),
                 child: Text("RESTART TIMER (${lastValue.toString()})"),
