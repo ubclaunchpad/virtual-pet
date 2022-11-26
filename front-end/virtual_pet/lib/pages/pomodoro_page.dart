@@ -1,6 +1,6 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'minutes.dart';
 import 'dart:async';
 
@@ -15,16 +15,12 @@ class PomodoroPage extends StatefulWidget {
 class PomodoroState extends State<PomodoroPage> {
   int timeLeft = 0;
   static const String routeName = "/PomodoroPage";
-  late FixedExtentScrollController _controller;
   bool inProgress = false;
   int lastValue = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    _controller = FixedExtentScrollController();
   }
 
   void _startCountDown() {
@@ -32,7 +28,7 @@ class PomodoroState extends State<PomodoroPage> {
       inProgress = true;
       lastValue = timeLeft;
     });
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timeLeft > 0) {
         setState(() {
           timeLeft--;
@@ -82,7 +78,7 @@ class PomodoroState extends State<PomodoroPage> {
               itemExtent: 50,
               perspective: 0.005,
               diameterRatio: 1.2,
-              physics: FixedExtentScrollPhysics(),
+              physics: const FixedExtentScrollPhysics(),
               childDelegate: ListWheelChildBuilderDelegate(
                 childCount: 60,
                 builder: (context, index) {
@@ -97,26 +93,27 @@ class PomodoroState extends State<PomodoroPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(inProgress.toString()),
-              Text("LAST VALUE IS " + lastValue.toString()),
+              // Text(inProgress.toString()),
+              // Text("LAST VALUE IS " + lastValue.toString()),
               Text(
                 timeLeft == 0 ? "DONE" : timeLeft.toString(),
-                style: TextStyle(fontSize: 50),
+                style: const TextStyle(fontSize: 50),
               ),
               MaterialButton(
                 onPressed: _startCountDown,
                 color: Colors.blue,
-                child: Text("START TIMER"),
+                child: const Text("START TIMER"),
               ),
               MaterialButton(
                 onPressed: inProgress == true ? _stopTimer : null,
                 color: Colors.blue,
-                child: Text("STOP TIMER"),
+                child: const Text("STOP TIMER"),
               ),
               MaterialButton(
                 onPressed: inProgress == true ? null : _restartTimer,
                 color: Colors.blue,
-                child: Text("RESTART TIMER (" + lastValue.toString() + ")"),
+                // child: Text("RESTART TIMER (" + lastValue.toString() + ")"),
+                child: Text("RESTART TIMER (${lastValue.toString()})"),
               ),
             ],
           ),
