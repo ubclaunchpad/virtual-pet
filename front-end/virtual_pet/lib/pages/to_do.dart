@@ -1,39 +1,94 @@
 import 'package:flutter/material.dart';
 
+// todo item class
 class Todo {
-  Todo({required this.name, required this.checked});
-  final String name;
+  String name;
   bool checked;
+
+  Todo({
+    required this.name, 
+    required this.checked});
 }
 
-class TodoItem extends StatelessWidget {
-  TodoItem({
+// Todo item widget
+class TodoItemTile extends StatefulWidget {
+  final Todo todo;
+  final Function (Todo todo) onChecked;
+  final Function(Todo todo) onChanged;
+  
+  TodoItemTile({
     required this.todo,
-    required this.onTodoChanged,
+    required this.onChecked,
+    required this.onChanged
   }) : super(key: ObjectKey(todo));
 
-  final Todo todo;
-  final onTodoChanged;
+  @override
+  _TodoItemTileState createState() => _TodoItemTileState();
+}
 
-  TextStyle? _getTextStyle(bool checked) {
-    if (!checked) return null;
+class _TodoItemTileState extends State<TodoItemTile> {
+  late Todo todo;
+  late bool _isEditingMode;
+  late TextEditingController _todoEditingController;
 
-    return TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough,
-    );
+  @override
+  void initState() {
+    super.initState();
+    this.todo = widget.todo;
+    this._isEditingMode = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        onTodoChanged(todo);
+        widget.onChecked(todo);
       },
-      leading: CircleAvatar(
-        child: Text(todo.name[0]),
-      ),
-      title: Text(todo.name, style: _getTextStyle(todo.checked)),
+      title: titleWidget,
+      // add the container for edit button
+      trailing: trailingButton,
+    );
+  }
+
+  Widget get titleWidget {
+    if (_isEditingMode) {
+      _todoEditingController = TextEditingController(text: todo.name);
+      return TextField(
+        controller: _todoEditingController,
+      );
+    } else {
+      return Text(todo.name, style: _getTextStyle(todo.checked));
+    }
+  }
+
+  Widget get trailingButton {
+    if (_isEditingMode) {
+      return IconButton(onPressed: saveChange, icon: Icon(Icons.check));
+    } else {
+      return IconButton(icon: Icon(Icons.edit), onPressed: _toggleMode);
+    }
+  }
+
+  void saveChange() {
+    this.todo.name = _todoEditingController.text;
+    _toggleMode();
+    if (widget.onChanged != null) {
+      widget.onChanged(this.todo);
+    }
+  }
+
+  void _toggleMode() {
+    setState(() {
+      _isEditingMode = !_isEditingMode;
+    });
+  }
+  
+  TextStyle? _getTextStyle(bool checked) {
+    if (!checked) return null;
+
+    return TextStyle(
+      color: Colors.black54,
+      decoration: TextDecoration.lineThrough,
     );
   }
 }
@@ -56,9 +111,10 @@ class _TodoListState extends State<TodoList> {
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         children: _todos.map((Todo todo) {
-          return TodoItem(
+          return TodoItemTile(
             todo: todo,
-            onTodoChanged: _handleTodoChange,
+            onChecked: _handleChecked,
+            onChanged: _handeChange,
           );
         }).toList(),
       ),
@@ -69,12 +125,16 @@ class _TodoListState extends State<TodoList> {
     );
   }
 
-  void _handleTodoChange(Todo todo) {
+  void _handleChecked(Todo todo) {
     setState(() {
       todo.checked = !todo.checked;
     });
   }
 
+// init onChange? not sure why this works lmao
+  void _handeChange(Todo updatedTodo) {
+  }
+  
   void _addTodoItem(String name) {
     setState(() {
       _todos.add(Todo(name: name, checked: false));
