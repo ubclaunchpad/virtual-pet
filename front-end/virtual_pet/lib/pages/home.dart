@@ -18,8 +18,11 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
-        body: const Center(
-          child: VirutalPetGameLayer(),
+        body: SafeArea(
+          child: const Center(
+            child: VirutalPetGameLayer(),
+            // child: Text("HEllo"),
+          ),
         ),
 
         /// instead of using bottom sheet, we could also try bottomNavigationBar
