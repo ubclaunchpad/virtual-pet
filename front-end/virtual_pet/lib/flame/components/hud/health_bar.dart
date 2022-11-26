@@ -12,9 +12,8 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
     gameRef.virtualPetData.health.addListener(onHealthChange);
 
     healthTextComponent = TextComponent(
-      text: healthDisplayMessage(gameRef.virtualPetData.health.value), 
-      anchor: Anchor.topLeft
-    );
+        text: healthDisplayMessage(gameRef.virtualPetData.health.value),
+        anchor: Anchor.topLeft);
     add(healthTextComponent);
 
     return super.onLoad();
@@ -22,8 +21,8 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
 
   @override
   void render(Canvas canvas) {
-    Rect healthContainer =
-      Rect.fromCenter(center: Offset.zero, width: calculateHealthBarSize(), height: 50);
+    Rect healthContainer = Rect.fromCenter(
+        center: Offset.zero, width: calculateHealthBarSize(), height: 50);
     canvas.drawRect(healthContainer, Paint()..color = Colors.green);
   }
 
@@ -42,6 +41,7 @@ class HealthBar extends Component with HasGameRef<VirtualPetGame> {
   }
 
   void onHealthChange() {
-    healthTextComponent.text = healthDisplayMessage(gameRef.virtualPetData.health.value);
+    healthTextComponent.text =
+        healthDisplayMessage(gameRef.virtualPetData.health.value);
   }
 }
