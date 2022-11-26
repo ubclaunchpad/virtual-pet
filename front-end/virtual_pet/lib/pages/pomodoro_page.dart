@@ -62,7 +62,6 @@ class PomodoroState extends State<PomodoroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: "Timer"),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +96,6 @@ class PomodoroState extends State<PomodoroPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("inProgress is " + inProgress.toString()),
               // Text("LAST VALUE IS " + lastValue.toString()),
               Text(
                 timeLeft == 0 ? "DONE" : timeLeft.toString(),
@@ -107,20 +105,19 @@ class PomodoroState extends State<PomodoroPage> {
                 onPressed: timeLeft != 0 && inProgress == false
                     ? _startCountDown
                     : null,
-                color: Colors.blue,
+                color: Colors.green[400],
                 child: const Text("START TIMER"),
               ),
               MaterialButton(
                 onPressed: inProgress == true ? _stopTimer : null,
-                color: Colors.blue,
+                color: Colors.green[400],
                 child: const Text("STOP TIMER"),
               ),
               MaterialButton(
                 onPressed: firstTime == true || inProgress == true
                     ? null
                     : _restartTimer,
-                color: Colors.blue,
-                // child: Text("RESTART TIMER (" + lastValue.toString() + ")"),
+                color: Colors.green[400],
                 child: Text("RESTART TIMER (${lastValue.toString()})"),
               ),
             ],

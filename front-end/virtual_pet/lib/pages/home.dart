@@ -19,8 +19,8 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: const Center(
+        body: const SafeArea(
+          child: Center(
             child: VirtualPetGameLayer(),
           ),
         ),
