@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// todo item class
+// Todo item class
 class Todo {
   String name;
   bool checked;
@@ -10,7 +10,7 @@ class Todo {
     required this.checked});
 }
 
-// Todo item widget
+// Todo item tile widget
 class TodoItemTile extends StatefulWidget {
   final Todo todo;
   final Function (Todo todo) onChecked;
@@ -23,7 +23,7 @@ class TodoItemTile extends StatefulWidget {
   }) : super(key: ObjectKey(todo));
 
   @override
-  _TodoItemTileState createState() => _TodoItemTileState();
+  State<TodoItemTile> createState() => _TodoItemTileState();
 }
 
 class _TodoItemTileState extends State<TodoItemTile> {
@@ -34,8 +34,8 @@ class _TodoItemTileState extends State<TodoItemTile> {
   @override
   void initState() {
     super.initState();
-    this.todo = widget.todo;
-    this._isEditingMode = false;
+    todo = widget.todo;
+    _isEditingMode = false;
   }
 
   @override
@@ -44,12 +44,20 @@ class _TodoItemTileState extends State<TodoItemTile> {
       onTap: () {
         widget.onChecked(todo);
       },
+      // hides checkbox when _isEditingMode == true
+      leading: Visibility(
+        visible: !_isEditingMode,
+        child: Checkbox(value: todo.checked, onChanged: (value) {
+          setState(() {
+            todo.checked = value!;
+          });
+        },)),
       title: titleWidget,
-      // add the container for edit button
       trailing: trailingButton,
     );
   }
 
+  // display text when _isEditingMode == false, and textfield otherwise
   Widget get titleWidget {
     if (_isEditingMode) {
       _todoEditingController = TextEditingController(text: todo.name);
@@ -61,41 +69,49 @@ class _TodoItemTileState extends State<TodoItemTile> {
     }
   }
 
+  // display edit icon when _isEditingMode == false, and check icon otherwise
   Widget get trailingButton {
     if (_isEditingMode) {
-      return IconButton(onPressed: saveChange, icon: Icon(Icons.check));
+      return IconButton(onPressed: saveChange, icon: const Icon(Icons.check));
     } else {
-      return IconButton(icon: Icon(Icons.edit), onPressed: _toggleMode);
+      return IconButton(icon: const Icon(Icons.edit), onPressed: _toggleMode);
     }
   }
 
+  // called when check button is pressed, saves changes made on textfield
   void saveChange() {
-    this.todo.name = _todoEditingController.text;
+    todo.name = _todoEditingController.text;
     _toggleMode();
-    if (widget.onChanged != null) {
-      widget.onChanged(this.todo);
-    }
+    widget.onChanged(todo);
+    setState(() {
+      todo.checked = false;
+    });
   }
 
+  // called when edit button or check button is pressed, toggles _isEditingMode
   void _toggleMode() {
     setState(() {
       _isEditingMode = !_isEditingMode;
     });
   }
   
+  // add strikethrough to text, mark item as complete
   TextStyle? _getTextStyle(bool checked) {
     if (!checked) return null;
 
-    return TextStyle(
+    return const TextStyle(
       color: Colors.black54,
       decoration: TextDecoration.lineThrough,
     );
   }
 }
 
+// List view
 class TodoList extends StatefulWidget {
+  const TodoList({super.key});
+
   @override
-  _TodoListState createState() => new _TodoListState();
+  State<TodoList> createState() => _TodoListState();
 }
 
 class _TodoListState extends State<TodoList> {
@@ -104,12 +120,13 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Todo list'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Todo list'),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        // populate _todos and display each item as list tile
         children: _todos.map((Todo todo) {
           return TodoItemTile(
             todo: todo,
@@ -121,7 +138,7 @@ class _TodoListState extends State<TodoList> {
       floatingActionButton: FloatingActionButton(
           onPressed: () => _displayDialog(),
           tooltip: 'Add Item',
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 
@@ -131,7 +148,6 @@ class _TodoListState extends State<TodoList> {
     });
   }
 
-// init onChange? not sure why this works lmao
   void _handeChange(Todo updatedTodo) {
   }
   
@@ -169,11 +185,13 @@ class _TodoListState extends State<TodoList> {
 }
 
 class TodoApp extends StatelessWidget {
+  const TodoApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return const MaterialApp(
       title: 'Todo list',
-      home: new TodoList(),
+      home: TodoList(),
     );
   }
 }
