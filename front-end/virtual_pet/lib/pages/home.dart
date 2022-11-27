@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_pet/pages/to_do.dart';
+import 'package:virtual_pet/flame/components/todo/todo_list.dart';
 import 'package:virtual_pet/pages/pomodoro_page.dart';
 import '../flame/layers/virtual_pet_game_layer.dart';
 
