@@ -11,13 +11,13 @@ void main() {
   Flame.device.setPortrait();
   runApp(InheritedVirtualPetGameWrapper(
     virtualPetGame: VirtualPetGame(), 
-    child: const VirtualPetApp()
+    child: const VirtalPetApp()
   ));
 }
 
 /// the main app
-class VirtualPetApp extends StatelessWidget {
-  const VirtualPetApp({super.key});
+class VirtalPetApp extends StatelessWidget {
+  const VirtalPetApp({super.key});
 
   @override
   Widget build(BuildContext context) {
