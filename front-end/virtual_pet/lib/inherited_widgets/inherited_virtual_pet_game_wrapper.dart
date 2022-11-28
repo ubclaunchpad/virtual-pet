@@ -7,10 +7,13 @@ class InheritedVirtualPetGameWrapper extends InheritedWidget {
   const InheritedVirtualPetGameWrapper({
     required this.virtualPetGame, 
     required Widget child, 
-    super.key}) : super(child: child);
+    super.key
+  }) : super(child: child);
 
   @override 
-  bool updateShouldNotify(InheritedWidget oldWidget) => true;
+  bool updateShouldNotify(InheritedWidget oldWidget) {
+    return this != oldWidget;
+  };
 
   static InheritedVirtualPetGameWrapper of(BuildContext context) {
     final InheritedVirtualPetGameWrapper? result = context
