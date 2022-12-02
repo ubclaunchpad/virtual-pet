@@ -122,24 +122,19 @@ class VirtualPetAnimation extends SpriteAnimationComponent
 
   Future<void> loadAnimations() async {
     idleAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images
-            .load(_animationDataConfig.idleAnimationData.animationPath),
+        await gameRef.images.load(_animationDataConfig.idleAnimationData.animationPath),
         _animationDataConfig.idleAnimationData.animationData);
     forwardWalkAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images
-            .load(_animationDataConfig.walkAnimationData.animationPath),
+        await gameRef.images.load(_animationDataConfig.walkAnimationData.animationPath),
         _animationDataConfig.walkAnimationData.animationData);
     backwardWalkAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images
-            .load(_animationDataConfig.walkAnimationData.animationPath),
+        await gameRef.images.load(_animationDataConfig.walkAnimationData.animationPath),
         _animationDataConfig.walkAnimationData.animationData);
     jumpAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images
-            .load(_animationDataConfig.jumpAnimationData.animationPath),
+        await gameRef.images.load(_animationDataConfig.jumpAnimationData.animationPath),
         _animationDataConfig.jumpAnimationData.animationData);
     deathAnimation = SpriteAnimation.fromFrameData(
-        await gameRef.images
-            .load(_animationDataConfig.deathAnimationData.animationPath),
+        await gameRef.images.load(_animationDataConfig.deathAnimationData.animationPath),
         _animationDataConfig.deathAnimationData.animationData);
   }
 }
