@@ -6,6 +6,7 @@ import 'package:virtual_pet/flame/components/hud/health_bar.dart';
 import 'package:virtual_pet/flame/components/hud/level_bar.dart';
 import 'package:virtual_pet/flame/components/timers/health_timer.dart';
 import 'package:virtual_pet/flame/components/timers/level_timer.dart';
+import 'package:virtual_pet/flame/components/timers/walk_timer.dart';
 import 'package:virtual_pet/themes/theme_data.dart';
 
 class VirtualPetGame extends FlameGame {
@@ -21,6 +22,8 @@ class VirtualPetGame extends FlameGame {
 
     add(LevelTimer());
     add(LevelBar());
+
+    add(WalkTimer());
 
     add(VirtualPet());
 
