@@ -1,6 +1,7 @@
 enum VirtualPetAnimationState {
   idle,
-  walk,
+  walkForward,
+  walkBackward,
   jump,
   death,
 }
