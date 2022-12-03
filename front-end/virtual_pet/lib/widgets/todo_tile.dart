@@ -88,7 +88,9 @@ class _TodoItemTileState extends State<TodoItemTile> {
   
   // add strikethrough to text, mark item as complete
   TextStyle? _getTextStyle(bool checked) {
-    if (!checked) return null;
+    if (!checked) {
+      return null;
+    }
 
     return const TextStyle(
       color: Colors.black54,
