@@ -1,65 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_pet/widgets/app_bar.dart';
+import 'package:virtual_pet/widgets/todo_item.dart';
+import 'package:virtual_pet/widgets/todo_tile.dart';
 
-/// to do list
-class ToDoListPage extends StatefulWidget {
-  const ToDoListPage({super.key});
+// List view
+class TodoListPage extends StatefulWidget {
+  const TodoListPage({super.key});
 
   @override
-  ToDoState createState() => ToDoState();
+  State<TodoListPage> createState() => _TodoListPageState();
 }
 
-/// the state of page two (to do list)
-class ToDoState extends State<ToDoListPage> {
-  static const String routeName = "/ToDoListPage";
-
-  /// checkboxes are set to false (unchecked) by default
-  bool check1 = false;
-  bool check2 = false;
-  bool check3 = false;
+class _TodoListPageState extends State<TodoListPage> {
+  final TextEditingController _textFieldController = TextEditingController();
+  final List<Todo> _todos = <Todo>[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /// displays the "To Do:" message at the top
-        appBar: const CustomAppBar(title: "To-Do"),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          /// below are the checkboxes widgets
-          CheckboxListTile(
-            //checkbox positioned at right
-            value: check1,
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: (bool? value) {
-              setState(() {
-                check1 = value!;
-              });
-            },
-            title: const Text("Reply to Odin on Slack"),
-          ),
+      appBar: const CustomAppBar(title: "To-Do"),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        // populate _todos and display each item as list tile
+        children: _todos.map((Todo todo) {
+          return TodoItemTile(
+            todo: todo,
+            onChecked: _handleChecked,
+            onChanged: _handeChange,
+          );
+        }).toList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => _displayDialog(),
+          tooltip: 'Add Item',
+          child: const Icon(Icons.add)),
+    );
+  }
 
-          CheckboxListTile(
-            //checkbox positioned at right
-            value: check2,
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: (bool? value) {
-              setState(() {
-                check2 = value!;
-              });
-            },
-            title: const Text("Study for math midterm"),
-          ),
+  void _handleChecked(Todo todo) {
+    setState(() {
+      todo.checked = !todo.checked;
+    });
+  }
 
-          CheckboxListTile(
-            //checkbox positioned at left
-            value: check3,
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: (bool? value) {
-              setState(() {
-                check3 = value!;
-              });
-            },
-            title: const Text("Some other boring task"),
+  void _handeChange(Todo updatedTodo) {
+  }
+  
+  void _addTodoItem(String name) {
+    setState(() {
+      _todos.add(Todo(name: name, checked: false));
+    });
+    _textFieldController.clear();
+  }
+
+  Future<void> _displayDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add a new todo item'),
+          content: TextField(
+            controller: _textFieldController,
+            decoration: const InputDecoration(hintText: 'Type your new todo'),
           ),
-        ]));
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Add'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _addTodoItem(_textFieldController.text);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
