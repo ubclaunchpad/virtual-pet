@@ -4,7 +4,7 @@ import 'package:virtual_pet/widgets/todo_item.dart';
 // Todo item tile widget
 class TodoItemTile extends StatefulWidget {
   final Todo todo;
-  final Function (Todo todo) onChecked;
+  final Function(Todo todo) onChecked;
   final Function(Todo todo) onChanged;
   
   TodoItemTile({
